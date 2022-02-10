@@ -1,0 +1,44 @@
+{
+  "name": "yuliana",
+  "version": "1.0.0",
+  "description": "Yuliana's portfolio",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node dist/index.js",
+    "server": "nodemon index.js --ignore tests",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Demy/yuliana.git"
+  },
+  "keywords": [
+    "portfolio",
+    "methodist",
+    "методист",
+    "Юлиана",
+    "Юльяна"
+  ],
+  "author": "Demy Hallar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Demy/yuliana/issues"
+  },
+  "homepage": "https://github.com/Demy/yuliana#readme",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.15.3",
+    "install": "^0.13.0",
+    "mysql": "github:mysqljs/mysql",
+    "npm": "^7.21.1",
+    "tslint": "^6.1.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "typescript": "^4.5.4"
+  }
+}
