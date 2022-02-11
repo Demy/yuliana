@@ -10,14 +10,14 @@ export const login = (username: String, password: String) => (dispatch: Function
     })
     .then(response => {
       if (response.data.accessToken) {
-        dispatch({ action: SET_USER, payload: response.data });
+        dispatch({ type: SET_USER, payload: response.data });
       }
       return response.data;
     });
 };
 
 export const logout = () => (dispatch: Function) => {
-  dispatch({ action: SET_USER, payload: null });
+  dispatch({ type: SET_USER, payload: null });
 };
 
 export const register = (username: String, email: String, password: String) => (dispatch: Function) => {

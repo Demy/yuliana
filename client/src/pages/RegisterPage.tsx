@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import * as actions from "../redux/auth/actions";
 import { User, AllStores } from "../redux/types";
 
-export default function LoginPage() {
+export default function RegisterPage() {
 
   const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const user: User | null = useSelector<AllStores>(state => state.auth.user) as User;
@@ -19,25 +20,29 @@ export default function LoginPage() {
     setUsername(e.target.value);
   };
 
+  const onChangeEmail = (e: any) => {
+    setEmail(e.target.value);
+  };
+
   const onChangePassword = (e: any) => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = (e: any) => {
+  const handleRegister = (e: any) => {
     e.preventDefault();
     
-    dispatch(actions.login(username, password));
+    dispatch(actions.register(username, email, password));
   };
 
   useEffect(() => {
     if (user !== null) {
-      navigate('/projects');
+      navigate('projects');
     }
   });
 
   return (
     <div>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleRegister}>
         <div>
           <label htmlFor="username">Username</label>
           <input
@@ -45,6 +50,15 @@ export default function LoginPage() {
             name="username"
             value={username}
             onChange={onChangeUsername}
+          />
+        </div>
+        <div>
+          <label htmlFor="username">Email</label>
+          <input
+            type="text"
+            name="email"
+            value={email}
+            onChange={onChangeEmail}
           />
         </div>
         <div>
@@ -60,7 +74,7 @@ export default function LoginPage() {
           <button
             disabled={username === '' || password === ''}
           >
-            <span>Login</span>
+            <span>Register</span>
           </button>
         </div>
       </form>
