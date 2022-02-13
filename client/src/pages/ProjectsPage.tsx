@@ -17,10 +17,6 @@ export default function ProjectsPage() {
   });
 
   return (
-    <div className="projects">
-      {JSON.stringify(user)}
-      <p>Projects:</p>
-      {JSON.stringify(projects)}
-    </div>
+    <></>
   );
 }
