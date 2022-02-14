@@ -1,12 +1,15 @@
 import { Block } from "@mui/icons-material";
 import { Card } from "@mui/material";
+import PreloadedImage from "./block/PreloadedImage";
+import Stickers from "./block/Stickers";
 
 export interface Block {
   type: string,
-  title: string,
-  content: string,
+  title?: string,
+  content?: string | Array<string>,
   alt?: string,
   size?: string,
+  sticker?: string,
 }
 
 interface Props {
@@ -17,16 +20,19 @@ export default function BlockContent(props: Props) {
   
   let child = <></>;
   switch (props.block.type) {
-    case 'image': {
-      child = <img src={props.block.content} alt={props.block.alt} />
-    }
+    case 'image':
+      child = <PreloadedImage src={props.block.content as string} alt={props.block.alt || '...'} />
+      break;
+    case 'stickers':
+      child = <Stickers title={props.block.title} content={props.block.content} />
+      break;
   }
 
   return (
     <Card
       variant="outlined"
       sx={{
-        p: 2,
+        p: 3,
         display: 'flex',
         flexDirection: 'column',
         textAlign: 'right'

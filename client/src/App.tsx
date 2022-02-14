@@ -8,7 +8,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material/styles';
 import { lightBlue, purple } from '@mui/material/colors';
-import { Box, Container } from '@mui/material';
+import { AppBar, Box, Container, CssBaseline } from '@mui/material';
+import Header from './components/ui/Header';
 
 const options:ThemeOptions = {
   palette: {
@@ -22,6 +23,7 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
+        <Header />
         <Box
           component="main"
           sx={{
@@ -34,7 +36,12 @@ function App() {
             overflow: 'auto',
           }}
         >
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth="lg" sx={{ 
+            mt: 10, 
+            mb: 4 
+          }}>
+            <CssBaseline />
+            <AppBar />
             <Router>
               <Routes>
                 <Route path="/" element={<HomePage/>}/>

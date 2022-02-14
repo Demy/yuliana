@@ -1,7 +1,7 @@
 import { ListItemIcon, List, ListItem, ListItemText, Card } from "@mui/material";
 import { Theme, useTheme } from '@mui/material/styles';
-import NumericIcon from "../components/ui/NumericIcon";
-import Title from "../components/ui/Title";
+import NumericIcon from "../ui/NumericIcon";
+import Title from "../ui/Title";
 import ReactMarkdown from 'react-markdown'
 
 interface Props {
@@ -16,8 +16,10 @@ export default function TaskList(props: Props) {
     <Card
       variant="outlined"
       sx={{
-        p: 2,
-        height: `calc(100% - ${theme.spacing(4)})`
+        p: 3,
+      }}
+      style={{
+        width: '100%'
       }}
     >
       <Title>Задачи</Title>
