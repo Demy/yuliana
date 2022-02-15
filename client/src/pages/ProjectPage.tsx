@@ -1,12 +1,13 @@
-import { Grid, Paper, Container, Button, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Container from "@mui/material/Container";
 import { Theme, useTheme } from '@mui/material/styles';
 import Title from "../components/ui/Title";
 import { useParams } from "react-router-dom";
 import Projects from '../assets/projects.json'
 import BlockContent, { Block } from "../components/BlockContent";
 import TaskList from "../components/block/TaskList";
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import ProjectNavigation from "../components/ProjectNavigation";
 
 const getMdSize = (size: string | undefined): number => {
   switch (size) {
@@ -28,21 +29,12 @@ export default function ProjectPage() {
   const { id } = useParams();  
   const projectIds: Array<string> = Object.keys(Projects);
   let projectIndex: number = -1;
-  let nextName: string = '';
-  let prevName: string = '';
 
   let projectContent: any = {};
   if (id !== undefined) {
     projectIndex = projectIds.indexOf(id);
-    if (projectIndex > 0) {
-      prevName = (Projects as any)[projectIds[projectIndex - 1]].title;
-    }
-    if (projectIndex < projectIds.length - 1) {
-      nextName = (Projects as any)[projectIds[projectIndex + 1]].title;
-    }
     if (projectIndex >= 0) {
       projectContent = (Projects as any)[id];
-
     }
   }
 
@@ -125,36 +117,9 @@ export default function ProjectPage() {
             <BlockContent block={block} />
           </Grid>
         ))}
-
-        <Grid item xs={6}>
-          {projectIndex > 0 ? (
-            <Button 
-              variant="outlined" 
-              href={`/project/${projectIds[projectIndex - 1]}`}
-              startIcon={<ArrowLeftIcon />}
-            >
-              <Typography sx={{ display: { xs: 'none', md: 'inline' } }}>
-                {prevName}
-              </Typography>
-            </Button>
-          ) : <div></div>}
-        </Grid>
-        <Grid item xs={6} mt={2} style={{ textAlign: 'right' }}>
-          {projectIndex < projectIds.length - 1 ? (
-            <Button 
-              variant="outlined" 
-              href={`/project/${projectIds[projectIndex + 1]}`}
-              style={{ textAlign: 'right' }}
-              endIcon={<ArrowRightIcon />}
-            >
-              <Typography sx={{ display: { xs: 'none', md: 'inline' } }}>
-                {nextName}
-              </Typography>
-            </Button>
-          ) : <div></div>}
-        </Grid>
-        
       </Grid>
+
+      <ProjectNavigation id={id} projects={Projects as any} />
     </Container>
   );
 }

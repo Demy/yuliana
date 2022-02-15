@@ -1,8 +1,12 @@
-import { ListItemIcon, List, ListItem, ListItemText, Card } from "@mui/material";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Card from "@mui/material/Card";
 import { Theme, useTheme } from '@mui/material/styles';
 import NumericIcon from "../ui/NumericIcon";
 import Title from "../ui/Title";
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from 'react-markdown';
 
 interface Props {
   tasks: Array<string>,
@@ -38,7 +42,7 @@ export default function TaskList(props: Props) {
                   'p': 'span',
                   'strong': ({node, ...props}) => 
                     <span style={{
-                      color: theme.palette.secondary.dark, 
+                      color: theme.palette.primary.dark, 
                       fontWeight: 'bold'
                     }} {...props} />
                 }}>

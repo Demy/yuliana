@@ -13,6 +13,7 @@ export default function Title(props: TitleProps) {
       variant="h6" 
       color={props.color ?? "primary"} 
       gutterBottom
+      mb={0}
     >
       {props.children}
     </Typography>

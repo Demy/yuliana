@@ -1,36 +1,66 @@
-import { Card } from "@mui/material";
+import Container from "@mui/material/Container";
 import Title from "../ui/Title";
+import { makeStyles } from '@mui/styles';
 
 interface Props {
   title?: string,
-  content?: Array<string>
+  content: Array<string>
 }
 
 const colors = ['#CEE8FC', '#D1EAD2', '#FFE4BE', '#EDD8F0', '#FAD3D2', '#BEE9FC'];
 
+const useStyles = makeStyles({
+  sticker: {
+    textAlign: 'left',
+    verticalAlign: 'middle',
+    position: 'relative',
+    borderTopLeftRadius: '6px',
+    borderBottomLeftRadius: '6px',
+    borderBottomRightRadius: '6px',
+    '&:before': {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      borderStyle: 'solid',
+      background: 'rgba(186, 104, 200, 0.2)',
+      display: 'block',
+      width: 0,
+      borderWidth: '8px',
+      borderColor: '#fff #fff transparent transparent',
+      borderRadius: '0 0 0 5px',
+    },
+  },
+});
+
 export default function Stickers(props: Props) {
+
+  const classes = useStyles(props);
 
   return (
     <div>
       {props.title ? <Title>{props.title}</Title> : <></>}
       {props.content ? (props.content as Array<string>).map((sticker: string, index: number) => (
-        <Card
+        <Container
           key={`sticker${index}`}
-          variant="elevation"
           sx={{ 
             p: 3,
             m: 1,
             width: { 'md': '45%' },
-            display: { 'md': 'inline-block' }
+            display: { 'md': 'inline-block' },
+            '&::before': {
+              borderWidth: '8px',
+              borderColor: '#fff #fff transparent transparent',
+              borderRadius: '0 0 0 5px'
+            }
           }}
           style={{
-            textAlign: 'left',
-            verticalAlign: 'middle',
             backgroundColor: colors[index % colors.length]
           }}
+          className={classes.sticker}
         >
           {sticker}
-        </Card>
+        </Container>
       )) : <></>}
     </div>
   );
