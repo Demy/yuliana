@@ -46,6 +46,7 @@ export default function Stickers(props: Props) {
           sx={{ 
             p: 3,
             m: 1,
+            mb: 2,
             width: { 'md': '45%' },
             display: { 'md': 'inline-block' },
             '&::before': {

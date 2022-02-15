@@ -4,6 +4,7 @@ import Stickers from "./block/Stickers";
 import TitleLine from "./block/TitleLine";
 import TextBlock from "./block/TextBlock";
 import BlockContainer from "./block/BlockContainer";
+import ContentList from "./block/ContentList";
 
 export interface Block {
   type: string,
@@ -14,6 +15,7 @@ export interface Block {
   height?: number,
   align?: string,
   sticker?: string,
+  style?: string,
 }
 
 export const getMdSize = (size: string | undefined): number => {
@@ -65,6 +67,13 @@ export default function BlockContent(props: Props) {
         />
       );
       break
+    case 'list':
+      child = (<ContentList 
+          content={props.block.content as Array<string>} 
+          listStyle={props.block.style || 'unordered'} 
+          divided={props.block.size === 'full'}
+        />);
+      break;
   }
 
   console.log(props.blockId);
