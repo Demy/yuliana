@@ -1,27 +1,43 @@
-import Block from "@mui/icons-material/Block";
 import Card from "@mui/material/Card";
 import PreloadedImage from "./block/PreloadedImage";
 import Stickers from "./block/Stickers";
 import TitleLine from "./block/TitleLine";
 import TextBlock from "./block/TextBlock";
+import BlockContainer from "./block/BlockContainer";
 
 export interface Block {
   type: string,
   title?: string,
-  content?: string | Array<string>,
+  content?: string | Array<string> | Array<Block>,
   alt?: string,
   size?: string,
+  height?: number,
   align?: string,
   sticker?: string,
 }
 
+export const getMdSize = (size: string | undefined): number => {
+  switch (size) {
+    case 'small':
+      return 4;
+    case 'big':
+      return 8;
+    case 'full':
+      return 12;
+    default:
+      return 12;
+  }
+};
+
 interface Props {
   block: Block,
+  blockId?: number
 }
 
 export default function BlockContent(props: Props) {
   
   let child = <></>;
+  let withoutWrapper = false;
   switch (props.block.type) {
     case 'image':
       child = <PreloadedImage src={props.block.content as string} alt={props.block.alt || '...'} />
@@ -31,6 +47,7 @@ export default function BlockContent(props: Props) {
       break;
     case 'title':
       child = <TitleLine content={props.block.content as string} />
+      withoutWrapper = true;
       break;
     case 'text':
       child = (<TextBlock 
@@ -39,9 +56,20 @@ export default function BlockContent(props: Props) {
           sticker={props.block.sticker} 
         />);
       break;
+    case 'container':
+      withoutWrapper = true;
+      child = (
+        <BlockContainer 
+          blocks={props.block.content as Array<Block>} 
+          blockId={props.blockId || 1} 
+        />
+      );
+      break
   }
 
-  if (props.block.type === 'title') {
+  console.log(props.blockId);
+
+  if (withoutWrapper) {
     return child;
   }
 

@@ -5,26 +5,13 @@ import { Theme, useTheme } from '@mui/material/styles';
 import Title from "../components/ui/Title";
 import { useParams } from "react-router-dom";
 import Projects from '../assets/projects.json'
-import BlockContent, { Block } from "../components/BlockContent";
+import BlockContent, { Block, getMdSize } from "../components/BlockContent";
 import TaskList from "../components/block/TaskList";
 import ProjectNavigation from "../components/ProjectNavigation";
 
-const getMdSize = (size: string | undefined): number => {
-  switch (size) {
-    case 'small':
-      return 4;
-    case 'big':
-      return 8;
-    case 'full':
-      return 12;
-    default:
-      return 12;
-  }
-};
-
 export default function ProjectPage() {
 
-  const theme: Theme = useTheme();  
+  const theme: Theme = useTheme();
 
   const { id } = useParams();  
   const projectIds: Array<string> = Object.keys(Projects);
@@ -60,15 +47,20 @@ export default function ProjectPage() {
   }
 
   let blocks: Array<Block> = [];
+  let firstBlock: Block | null = null;
   if (projectContent['blocks'] !== undefined) {
-    blocks = projectContent['blocks'] as Array<Block>;
+    const allBlocks = projectContent['blocks'] as Array<Block>;
+    if (allBlocks.length > 0) {
+      firstBlock = allBlocks[0];
+    }
+    blocks = allBlocks.slice(1);
   }
 
   return (
     <Container>
       <Grid container spacing={3}>
         <Grid item xs={12} md={8}>
-          <Grid container spacing={2}>
+          <Grid container spacing={3}>
             {title || subtitle ? (
               <Grid item xs={12}>
                 <Paper sx={{ 
@@ -98,9 +90,9 @@ export default function ProjectPage() {
               </Grid>
             ) : <></>}
 
-            {blocks.length > 0 ? (
+            {firstBlock !== null ? (
               <Grid item xs={12}>
-                <BlockContent block={blocks[0]} />
+                <BlockContent block={firstBlock} />
               </Grid>
             ) : <></>}
           </Grid>
@@ -111,12 +103,13 @@ export default function ProjectPage() {
             <TaskList tasks={tasks} />
           </Grid>
         ) : <></>}
-
-        {blocks.slice(1).map((block, index) => (
+        
+        {blocks.map((block, index) => (
           <Grid key={`block${index}`} item xs={12} md={getMdSize(block.size)}>
-            <BlockContent block={block} />
+            <BlockContent block={block} blockId={index} />
           </Grid>
         ))}
+
       </Grid>
 
       <ProjectNavigation id={id} projects={Projects as any} />

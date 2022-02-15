@@ -18,13 +18,9 @@ export default function TaskList(props: Props) {
 
   return (
     <Card
-      variant="outlined"
-      sx={{
-        p: 3,
-      }}
-      style={{
-        width: '100%'
-      }}
+      variant="elevation"
+      sx={{ p: 3 }}
+      style={{ width: '100%' }}
     >
       <Title>Задачи</Title>
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
