@@ -80,4 +80,5 @@ typings/
 .fusebox/
 
 /build
+/client/build
 /coverage

@@ -4,6 +4,7 @@ import { AllStores, Project } from "../redux/types";
 import * as actions from "../redux/project/actions";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Theme, useTheme } from "@mui/material/styles";
 import Title from "../components/ui/Title";
@@ -45,6 +46,13 @@ export default function ProjectsPage() {
             <ProjectCard project={project} />
           </Grid>
         ))}
+
+        {projects.length === 0 ? (
+          <Container style={{ textAlign: 'center', marginTop: 200 }}>
+            <Typography>Загрузка...</Typography>
+          </Container>
+        ) : <></>}
+
       </Grid>
     </Container>
   );

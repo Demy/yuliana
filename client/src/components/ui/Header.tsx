@@ -5,7 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 
 const pages = [{ 
-  title: 'Кто я?', 
+  title: 'Кто я', 
   path: '/'
 }, { 
   title: 'мои проекты',

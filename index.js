@@ -8,10 +8,7 @@ dotenv.config();
 app.use(express());
 const port = 8000;
 
-var corsOptions = {
-  origin: "http://localhost:3000"
-};
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json())
 
 const db = require("./app/models");
