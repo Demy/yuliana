@@ -7,7 +7,6 @@ export const fetchProjects = () => (dispatch: Function) => {
     .get(API_URL + 'projects')
 		.then(res => {
       dispatch({ type: SET_PROJECTS, payload: res.data });
-			console.log(res.data);
 		})
 		.catch(error => {
 			console.log(error);

@@ -17,8 +17,6 @@ module.exports = function(app) {
       
       let rawdata = fs.readFileSync('projects.json');
       let projects = JSON.parse(rawdata);
-      // const keys = Object.keys(projects);
-      // const result = keys.map(key => ({ ...projects[key], id: key }));
 
       res.send(projects);
     }

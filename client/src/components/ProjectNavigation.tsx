@@ -30,33 +30,35 @@ export default function ProjectNavigation(props: Props) {
   return (  
     <Grid container spacing={3} mt={2}>
       <Grid item xs={6}>
-        {projectIndex > 0 ? (
-          <Link to={`/project/${projectIds[projectIndex - 1]}`}>
-            <Button 
-              variant="outlined" 
-              startIcon={<ArrowLeftIcon />}
-            >
-              <Typography sx={{ display: { xs: 'none', md: 'inline' } }}>
-                {prevName}
-              </Typography>
-            </Button>
-          </Link>
-        ) : <div></div>}
+        <Link to={projectIndex > 0 ? 
+          `/project/${projectIds[projectIndex - 1]}` : 
+          '/projects'
+        }>
+          <Button 
+            variant="outlined" 
+            startIcon={<ArrowLeftIcon />}
+          >
+            <Typography sx={{ display: { xs: 'none', md: 'inline' } }}>
+              {projectIndex > 0 ? prevName : 'Все проекты'}
+            </Typography>
+          </Button>
+        </Link>
       </Grid>
       <Grid item xs={6} mt={2} style={{ textAlign: 'right' }}>
-        {projectIndex < projectIds.length - 1 ? (
-          <Link to={`/project/${projectIds[projectIndex + 1]}`}>
+          <Link to={projectIndex < projectIds.length - 1 ? 
+            `/project/${projectIds[projectIndex + 1]}` : 
+            '/projects'
+          }>
             <Button 
               variant="outlined" 
               style={{ textAlign: 'right' }}
               endIcon={<ArrowRightIcon />}
             >
               <Typography sx={{ display: { xs: 'none', md: 'inline' } }}>
-                {nextName}
+                {projectIndex < projectIds.length - 1 ? nextName : 'Все проекты'}
               </Typography>
             </Button>
           </Link>
-        ) : <div></div>}
       </Grid>
     </Grid>
   );

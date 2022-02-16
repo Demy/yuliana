@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { AppBar, Container, Toolbar, Typography, Box, IconButton } from '@mui/material';
 import { MenuItem, Button, Menu } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
