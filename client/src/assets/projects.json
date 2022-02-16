@@ -96,6 +96,24 @@
         ],
         "size": "full",
         "style": "unordered"
+      }, {
+        "type": "container",
+        "content": [{
+            "type": "meter",
+            "align": "right",
+            "title": "COR",
+            "percent": "96",
+            "content": "48 участников успешно завершили марафон",
+            "size": "full"
+          }, {
+            "type": "meter",
+            "align": "right",
+            "title": "CSI",
+            "percent": "84",
+            "content": "42 оценили марафон на 8+",
+            "size": "full"
+        }],
+        "size": "tiny"
       }
     ]
   }

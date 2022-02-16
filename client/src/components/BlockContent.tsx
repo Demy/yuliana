@@ -5,6 +5,7 @@ import TitleLine from "./block/TitleLine";
 import TextBlock from "./block/TextBlock";
 import BlockContainer from "./block/BlockContainer";
 import ContentList from "./block/ContentList";
+import Meter from "./block/Meter";
 
 export interface Block {
   type: string,
@@ -16,10 +17,13 @@ export interface Block {
   align?: string,
   sticker?: string,
   style?: string,
+  percent?: number,
 }
 
 export const getMdSize = (size: string | undefined): number => {
   switch (size) {
+    case 'tiny':
+      return 4;
     case 'small':
       return 4;
     case 'big':
@@ -52,27 +56,32 @@ export default function BlockContent(props: Props) {
       withoutWrapper = true;
       break;
     case 'text':
-      child = (<TextBlock 
+      child = <TextBlock 
           title={props.block.title} 
           content={props.block.content as Array<string>} 
           sticker={props.block.sticker} 
-        />);
+        />;
       break;
     case 'container':
       withoutWrapper = true;
-      child = (
-        <BlockContainer 
+      child = <BlockContainer 
           blocks={props.block.content as Array<Block>} 
           blockId={props.blockId || 1} 
-        />
-      );
-      break
+        />;
+      break;
     case 'list':
-      child = (<ContentList 
+      child = <ContentList 
           content={props.block.content as Array<string>} 
           listStyle={props.block.style || 'unordered'} 
           divided={props.block.size === 'full'}
-        />);
+        />;
+      break;
+    case 'meter':
+      child = <Meter 
+        title={props.block.title}
+        percent={props.block.percent || 0} 
+        content={props.block.content as string} 
+      />;
       break;
   }
 
@@ -89,7 +98,7 @@ export default function BlockContent(props: Props) {
         p: 3,
         display: 'flex',
         flexDirection: 'column',
-        textAlign: props.block.align || 'left'
+        textAlign: { xs: 'left', md: props.block.align || 'left' }
       }}
     >
       {child}
