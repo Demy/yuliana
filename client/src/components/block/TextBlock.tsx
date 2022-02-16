@@ -5,7 +5,7 @@ import SmallSticker from "../ui/SmallSticker";
 
 interface Props {
   title?: string,
-  content: Array<string>,
+  content: string[],
   sticker?: string
 }
 

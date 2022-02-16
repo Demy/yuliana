@@ -1,9 +1,9 @@
-export const getArcParams = (c: Array<number>, r: Array<number>, a: Array<number>, psi: number) => {
+export const getArcParams = (c: number[], r: number[], a: number[], psi: number) => {
   const cos = Math.cos;
   const sin = Math.sin;
   const pi = Math.PI;
 
-  const f_matrix_times = (matrix: Array<Array<number>>, t: Array<number>) => {
+  const f_matrix_times = (matrix: Array<number[]>, t: number[]) => {
     const a: number = matrix[0][0];
     const b: number = matrix[0][1];
     const c: number = matrix[1][0];
@@ -13,7 +13,7 @@ export const getArcParams = (c: Array<number>, r: Array<number>, a: Array<number
     return [a * x + b * y, c * x + d * y];
   };
   const f_rotate_matrix = ((x: number) => [[cos(x),-sin(x)], [sin(x), cos(x)]]);
-  const f_vec_add = ((a: Array<number>, b: Array<number>) => [a[0] + b[0], a[1] + b[1]]);
+  const f_vec_add = ((a: number[], b: number[]) => [a[0] + b[0], a[1] + b[1]]);
 
   const delta = a[1] % (2*pi);
   const rotMatrix = f_rotate_matrix(psi);

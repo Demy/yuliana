@@ -10,6 +10,7 @@ import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material/styles';
 import { purple } from '@mui/material/colors';
 import { AppBar, Box, Container, CssBaseline } from '@mui/material';
 import Header from './components/ui/Header';
+import ScrollToTop from './components/ui/ScrollToTop';
 
 const options:ThemeOptions = {
   palette: {
@@ -25,11 +26,13 @@ const options:ThemeOptions = {
 const theme = createTheme(options);
 
 function App() {
+  
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
         <Router>
           <Header />
+          <ScrollToTop />
           <Box
             component="main"
             sx={{
@@ -38,7 +41,7 @@ function App() {
                   ? theme.palette.grey[100]
                   : theme.palette.grey[900],
               flexGrow: 1,
-              height: '100vh',
+              minHeight: '100vh',
               overflow: 'auto',
             }}
           >

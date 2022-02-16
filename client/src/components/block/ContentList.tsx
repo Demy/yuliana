@@ -7,7 +7,7 @@ import { Theme, useTheme } from '@mui/material/styles';
 import ReactMarkdown from 'react-markdown';
 
 interface Props {
-  content: Array<string>,
+  content: string[],
   listStyle: string,
   divided: boolean,
 }
@@ -16,7 +16,7 @@ export default function ContentList(props: Props) {
   
   const theme: Theme = useTheme(); 
 
-  const buildList = (list: Array<string>, number: number) => {
+  const buildList = (list: string[], number: number) => {
     return (
       <List dense={false}>
         {list.map((text, index) => (

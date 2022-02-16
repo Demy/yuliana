@@ -9,7 +9,7 @@ import Title from "../ui/Title";
 import ReactMarkdown from 'react-markdown';
 
 interface Props {
-  tasks: Array<string>,
+  tasks: string[],
 }
 
 export default function TaskList(props: Props) {

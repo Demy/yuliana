@@ -1,59 +1,84 @@
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 import { Theme, useTheme } from '@mui/material/styles';
 import Title from "../components/ui/Title";
 import { useParams } from "react-router-dom";
-import Projects from '../assets/projects.json'
-import BlockContent, { Block, getMdSize } from "../components/BlockContent";
+import BlockContent, { getMdSize } from "../components/BlockContent";
 import TaskList from "../components/block/TaskList";
 import ProjectNavigation from "../components/ProjectNavigation";
+import { AllStores, Block, Project } from "../redux/types";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../redux/project/actions";
+import { useEffect } from "react";
 
 export default function ProjectPage() {
+  
+  const { id } = useParams();  
 
   const theme: Theme = useTheme();
 
-  const { id } = useParams();  
-  const projectIds: Array<string> = Object.keys(Projects);
+  const projects: Project[] = useSelector<AllStores>(state => state.project.projects) as Project[];
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (projects.length === 0) {
+      dispatch(actions.fetchProjects());
+      console.log('load')
+    }
+  }, [dispatch, projects.length]);
+
+  if (projects.length === 0) {
+    return (
+      <Container style={{ textAlign: 'center' }}>
+        <Typography>Загрузка...</Typography>
+      </Container>
+    );
+  }
+
+  const projectIds: string[] = projects.map(p => p.id);
   let projectIndex: number = -1;
 
-  let projectContent: any = {};
+  let title: string = '';
+  let subtitle: string = '';
+  let extra: string = '';
+  let tasks: string[] = [];
+  let blocks: Block[] = [];
+  let firstBlock: Block | null = null;
+
   if (id !== undefined) {
     projectIndex = projectIds.indexOf(id);
     if (projectIndex >= 0) {
-      projectContent = (Projects as any)[id];
+      const projectContent: Project | undefined = projects.find(p => p.id === id);
+      if (projectContent !== undefined) {
+        if (projectContent.subtitle !== undefined) {
+          subtitle = projectContent.subtitle;
+        }
+        if (projectContent.title !== undefined) {
+          title = projectContent.title;
+          if (subtitle !== '') {
+            title = `${title}: ${subtitle}`;
+          }
+        }
+        if (projectContent.extra !== undefined) {
+          extra = projectContent.extra;
+        }
+      
+        if (projectContent.tasks !== undefined) {
+          tasks = projectContent.tasks;
+        }
+      
+        if (projectContent.blocks !== undefined) {
+          const allBlocks = projectContent.blocks;
+          if (allBlocks.length > 0) {
+            firstBlock = allBlocks[0];
+          }
+          blocks = allBlocks.slice(1);
+        }
+      }
     }
-  }
-
-  let subtitle: string = '';
-  if (projectContent['subtitle'] !== undefined) {
-    subtitle = projectContent['subtitle'] as string;
-  }
-  let title: string = '';
-  if (projectContent['title'] !== undefined) {
-    title = projectContent['title'] as string;
-    if (subtitle !== '') {
-      title = `${title}: ${subtitle}`;
-    }
-  }
-  let extra: string = '';
-  if (projectContent['extra'] !== undefined) {
-    extra = projectContent['extra'] as string;
-  }
-
-  let tasks: Array<string> = [];
-  if (projectContent['tasks'] !== undefined) {
-    tasks = projectContent['tasks'] as Array<string>;
-  }
-
-  let blocks: Array<Block> = [];
-  let firstBlock: Block | null = null;
-  if (projectContent['blocks'] !== undefined) {
-    const allBlocks = projectContent['blocks'] as Array<Block>;
-    if (allBlocks.length > 0) {
-      firstBlock = allBlocks[0];
-    }
-    blocks = allBlocks.slice(1);
   }
 
   return (
@@ -112,7 +137,7 @@ export default function ProjectPage() {
 
       </Grid>
 
-      <ProjectNavigation id={id} projects={Projects as any} />
+      <ProjectNavigation current={id} />
     </Container>
   );
 }

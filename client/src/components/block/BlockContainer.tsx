@@ -1,8 +1,9 @@
-import BlockContent, { Block, getMdSize } from "../BlockContent";
+import BlockContent, { getMdSize } from "../BlockContent";
 import Grid from "@mui/material/Grid";
+import { Block } from "../../redux/types";
 
 interface Props {
-  blocks: Array<Block>,
+  blocks: Block[],
   blockId?: number,
 }
 

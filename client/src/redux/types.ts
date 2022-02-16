@@ -4,7 +4,7 @@ export type AllStores = {
 }
 
 export interface StoreAction {
-  type: String,
+  type: string,
   payload: any
 };
 
@@ -22,10 +22,27 @@ export interface User {
 };
 
 export interface HTTPHeader {
-  Authorization?: String,
+  Authorization?: string,
 };
 
 export interface Project {
-  id: Number,
-  name: String,
+  id: string,
+  title: string,
+  subtitle?: string,
+  tasks?: string[],
+  extra?: string,
+  blocks?: Block[]
+};
+
+export interface Block {
+  type: string,
+  title?: string,
+  content?: string | string[] | Block[],
+  alt?: string,
+  size?: string,
+  height?: number,
+  align?: string,
+  sticker?: string,
+  style?: string,
+  percent?: number,
 };

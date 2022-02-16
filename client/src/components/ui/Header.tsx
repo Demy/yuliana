@@ -1,8 +1,8 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { AppBar, Container, Toolbar, Typography, Box, IconButton } from '@mui/material';
 import { MenuItem, Button, Menu } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const pages = [{ 
   title: 'Кто я?', 
@@ -17,21 +17,15 @@ const pages = [{
 
 export default function Header() {
   
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
 
-  const navigate = useNavigate();
-
-  const handleOpenNavMenu = (event: any) => {
-    setAnchorElNav(event.currentTarget);
+  const handleOpenNavMenu = (e: any) => {
+    e.preventDefault()
+    setAnchorElNav(e.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (e: any) => {
     setAnchorElNav(null);
-  };
-
-  const gotoPage = (path: string) => {
-    handleCloseNavMenu();
-    navigate(path);
   };
 
   return (
@@ -68,21 +62,29 @@ export default function Header() {
               }}
             >
               {pages.map((page, index) => (
-                <MenuItem key={`page${index}`} onClick={gotoPage.bind(null, page.path)}>
-                  <Typography textAlign="center">{page.title}</Typography>
-                </MenuItem>
+                <Link 
+                  to={page.path} 
+                  key={`pageS${index}`}
+                  onClick={handleCloseNavMenu}
+                >
+                  <MenuItem>
+                    <Typography textAlign="center">{page.title}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page, index) => (
-              <Button
-                key={`pageMobile${index}`} 
-                onClick={gotoPage.bind(null, page.path)}
-                sx={{ my: 1, mx: 1, color: 'white', display: 'block' }}
+              <Link 
+                to={page.path} 
+                key={`pageM${index}`}
+                onClick={handleCloseNavMenu}
               >
-                {page.title}
-              </Button>
+                <Button sx={{  my: 1, mx: 1, color: 'white', display: 'block' }} >
+                  {page.title}
+                </Button>
+              </Link>
             ))}
           </Box>
         </Toolbar>

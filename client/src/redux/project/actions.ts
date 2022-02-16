@@ -6,7 +6,7 @@ export const fetchProjects = () => (dispatch: Function) => {
   axios
     .get(API_URL + 'projects')
 		.then(res => {
-      dispatch({ action: SET_PROJECTS, payload: res.data });
+      dispatch({ type: SET_PROJECTS, payload: res.data });
 			console.log(res.data);
 		})
 		.catch(error => {

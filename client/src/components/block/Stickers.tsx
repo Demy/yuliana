@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 
 interface Props {
   title?: string,
-  content: Array<string>
+  content: string[]
 }
 
 const colors = ['#CEE8FC', '#D1EAD2', '#FFE4BE', '#EDD8F0', '#FAD3D2', '#BEE9FC'];
@@ -40,7 +40,7 @@ export default function Stickers(props: Props) {
   return (
     <div>
       {props.title ? <Title>{props.title}</Title> : <></>}
-      {props.content ? (props.content as Array<string>).map((sticker: string, index: number) => (
+      {props.content ? (props.content as string[]).map((sticker: string, index: number) => (
         <Container
           key={`sticker${index}`}
           sx={{ 

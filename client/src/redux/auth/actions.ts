@@ -2,7 +2,7 @@ import { API_URL } from './../constants';
 import { SET_USER, AUTH_URL } from './constants';
 import axios from "axios";
 
-export const login = (username: String, password: String) => (dispatch: Function) => {
+export const login = (username: string, password: string) => (dispatch: Function) => {
   axios
     .post(API_URL + AUTH_URL + 'signin', {
       username,
@@ -20,7 +20,7 @@ export const logout = () => (dispatch: Function) => {
   dispatch({ type: SET_USER, payload: null });
 };
 
-export const register = (username: String, email: String, password: String) => (dispatch: Function) => {
+export const register = (username: string, email: string, password: string) => (dispatch: Function) => {
   axios.post(API_URL + AUTH_URL + 'signup', {
     username,
     email,

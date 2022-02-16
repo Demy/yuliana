@@ -6,19 +6,7 @@ import TextBlock from "./block/TextBlock";
 import BlockContainer from "./block/BlockContainer";
 import ContentList from "./block/ContentList";
 import Meter from "./block/Meter";
-
-export interface Block {
-  type: string,
-  title?: string,
-  content?: string | Array<string> | Array<Block>,
-  alt?: string,
-  size?: string,
-  height?: number,
-  align?: string,
-  sticker?: string,
-  style?: string,
-  percent?: number,
-}
+import { Block } from "../redux/types";
 
 export const getMdSize = (size: string | undefined): number => {
   switch (size) {
@@ -49,7 +37,7 @@ export default function BlockContent(props: Props) {
       child = <PreloadedImage src={props.block.content as string} alt={props.block.alt || '...'} />
       break;
     case 'stickers':
-      child = <Stickers title={props.block.title} content={props.block.content as Array<string>} />
+      child = <Stickers title={props.block.title} content={props.block.content as string[]} />
       break;
     case 'title':
       child = <TitleLine content={props.block.content as string} />
@@ -58,20 +46,20 @@ export default function BlockContent(props: Props) {
     case 'text':
       child = <TextBlock 
           title={props.block.title} 
-          content={props.block.content as Array<string>} 
+          content={props.block.content as string[]} 
           sticker={props.block.sticker} 
         />;
       break;
     case 'container':
       withoutWrapper = true;
       child = <BlockContainer 
-          blocks={props.block.content as Array<Block>} 
+          blocks={props.block.content as Block[]} 
           blockId={props.blockId || 1} 
         />;
       break;
     case 'list':
       child = <ContentList 
-          content={props.block.content as Array<string>} 
+          content={props.block.content as string[]} 
           listStyle={props.block.style || 'unordered'} 
           divided={props.block.size === 'full'}
         />;
@@ -84,8 +72,6 @@ export default function BlockContent(props: Props) {
       />;
       break;
   }
-
-  console.log(props.blockId);
 
   if (withoutWrapper) {
     return child;
