@@ -130,7 +130,13 @@ export default function ProjectPage() {
         ) : <></>}
         
         {blocks.map((block, index) => (
-          <Grid key={`block${index}`} item xs={12} md={getMdSize(block.size)}>
+          <Grid 
+            key={`block${index}`} 
+            item 
+            xs={12} 
+            md={getMdSize(block.size)}
+            sx={{ display: { xs: 'block', md: block.size === 'full' ? 'block' : 'flex' } }}
+          >
             <BlockContent block={block} blockId={index} />
           </Grid>
         ))}

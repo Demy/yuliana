@@ -32,6 +32,12 @@ export default function TextBlock(props: Props) {
         >
           <ReactMarkdown 
             components={{
+              'img': ({node, ...props}) => 
+                <img 
+                  alt="illustration"
+                  style={{ maxWidth: '100%' }} 
+                  {...props} 
+                />,
               'strong': ({node, ...props}) => 
                 <span style={{
                   color: theme.palette.primary.dark, 

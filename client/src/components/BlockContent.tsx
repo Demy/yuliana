@@ -11,9 +11,11 @@ import { Block } from "../redux/types";
 export const getMdSize = (size: string | undefined): number => {
   switch (size) {
     case 'tiny':
-      return 4;
+      return 3;
     case 'small':
       return 4;
+    case 'half':
+      return 6;
     case 'big':
       return 8;
     case 'full':

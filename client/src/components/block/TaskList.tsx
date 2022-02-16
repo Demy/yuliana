@@ -23,7 +23,11 @@ export default function TaskList(props: Props) {
       style={{ width: '100%' }}
     >
       <Title>Задачи</Title>
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      <List sx={{ 
+        width: '100%', 
+        maxWidth: { 'xs': '100%', 'md': 360 }, 
+        bgcolor: 'background.paper' 
+      }}>
         {props.tasks.map((value: string, index: number) => (
           <ListItem
             key={`task${index}`}

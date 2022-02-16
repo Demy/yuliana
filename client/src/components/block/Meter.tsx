@@ -27,7 +27,10 @@ export default function Meter(props: Props) {
         </Title>
       ) : <></>}
       <div style={{ textAlign: 'center' }}>
-        <svg width="230" height="130">
+        <svg 
+          style={{ width: '230px', maxWidth: '100%' }} 
+          viewBox="0 0 230 130"
+        >
           <path 
             d={bgArcParams}
             strokeWidth={23} 
@@ -50,7 +53,7 @@ export default function Meter(props: Props) {
           {props.percent}%
         </Typography>
         <Typography
-          style={{ width: '230px', margin: '7px auto' }}
+          style={{ width: '100%', margin: '7px auto' }}
         >
           {props.content}
         </Typography>
