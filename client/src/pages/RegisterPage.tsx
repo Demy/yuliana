@@ -44,7 +44,7 @@ export default function RegisterPage() {
     if (validator.isEmail(email)) {
       dispatch(actions.register(username, email, password));
     } else {
-      toast('Please enter valid Email!')
+      toast('Please enter valid Email!');
     }
   };
 

@@ -12,3 +12,11 @@ export const fetchProjects = () => (dispatch: Function) => {
 			console.log(error);
 		});
 };
+
+export const sendEmail = (name: string, email: string, message: string) => (dispatch: Function) => {
+  axios.post(API_URL + 'email', {
+    name,
+    email,
+    message
+  });
+};
