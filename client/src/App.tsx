@@ -12,6 +12,7 @@ import { purple } from '@mui/material/colors';
 import { AppBar, Box, Container, CssBaseline } from '@mui/material';
 import Header from './components/ui/Header';
 import ScrollToTop from './components/ui/ScrollToTop';
+import NotFoundPage from './pages/NotFoundPage';
 
 const options:ThemeOptions = {
   palette: {
@@ -53,6 +54,7 @@ function App() {
               <CssBaseline />
               <AppBar />
               <Routes>
+                <Route path='*' element={<NotFoundPage />} />
                 <Route path="/" element={<HomePage/>}/>
                 <Route path="/contact" element={<ContactPage/>}/>
                 <Route path="/login" element={<LoginPage/>}/>

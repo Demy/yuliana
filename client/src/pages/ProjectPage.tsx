@@ -4,7 +4,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { Theme, useTheme } from '@mui/material/styles';
 import Title from "../components/ui/Title";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import BlockContent, { getMdSize } from "../components/BlockContent";
 import TaskList from "../components/block/TaskList";
 import ProjectNavigation from "../components/ProjectNavigation";
@@ -12,6 +12,8 @@ import { AllStores, Block, Project } from "../redux/types";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../redux/project/actions";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import NotFoundPage from "./NotFoundPage";
 
 export default function ProjectPage() {
   
@@ -22,6 +24,7 @@ export default function ProjectPage() {
   const projects: Project[] = useSelector<AllStores>(state => state.project.projects) as Project[];
 
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   useEffect(() => {
     if (projects.length === 0) {
@@ -48,11 +51,14 @@ export default function ProjectPage() {
   let blocks: Block[] = [];
   let firstBlock: Block | null = null;
 
+  let contentFound = false;
+
   if (id !== undefined) {
     projectIndex = projectIds.indexOf(id);
     if (projectIndex >= 0) {
       const projectContent: Project | undefined = projects.find(p => p.id === id);
       if (projectContent !== undefined) {
+        contentFound = true;
         if (projectContent.subtitle !== undefined) {
           subtitle = projectContent.subtitle;
         }
@@ -79,6 +85,10 @@ export default function ProjectPage() {
         }
       }
     }
+  } 
+
+  if (!contentFound) {
+    return <NotFoundPage />;
   }
 
   return (
