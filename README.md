@@ -1,6 +1,6 @@
 # yuliana
  
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a porfolio website for a educational course designer and my friend.
 
 ## Available Scripts
 
